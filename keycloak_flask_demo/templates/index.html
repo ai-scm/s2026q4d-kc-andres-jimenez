@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hola Mundo - Keycloak</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 720px; margin: 70px auto; padding: 0 20px; }
+        .card { border: 1px solid #ddd; border-radius: 10px; padding: 24px; }
+        a.button { display: inline-block; padding: 10px 16px; margin-top: 12px;
+                   background: #2563eb; color: white; text-decoration: none; border-radius: 6px; }
+        .secondary { background: #444 !important; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>¡Hola mundo!</h1>
+        <p>Esta es una aplicación Flask protegida mediante Keycloak y OpenID Connect.</p>
+
+        {% if user %}
+            <h2>Sesión iniciada correctamente</h2>
+            <p><strong>Usuario:</strong> {{ user.username or "No disponible" }}</p>
+            <p><strong>Nombre:</strong> {{ user.name or "No disponible" }}</p>
+            <p><strong>Correo:</strong> {{ user.email or "No disponible" }}</p>
+            <a class="button secondary" href="{{ url_for('logout') }}">Cerrar sesión</a>
+        {% else %}
+            <p>Aún no has iniciado sesión.</p>
+            <a class="button" href="{{ url_for('login') }}">Iniciar sesión con Keycloak</a>
+        {% endif %}
+    </div>
+</body>
+</html>
